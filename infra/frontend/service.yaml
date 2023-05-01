@@ -1,0 +1,20 @@
+#
+# The original Google demo depended on gaving a service "frontend-master" AND
+# a service "frontend-slave". We're using a single frontend server, so we create
+# two services that point to the same pod.
+#
+#
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  labels:
+    app: frontend
+spec:
+  type: NodePort
+  ports:
+    - protocol: "TCP"
+      port: 80
+      targetPort: 80
+  selector:
+    app: frontend
